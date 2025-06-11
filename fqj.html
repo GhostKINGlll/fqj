@@ -15,10 +15,16 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+            background: linear-gradient(135deg, #f8e8d8 0%, #e6d5c3 50%, #f8e8d8 100%);
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(255, 218, 185, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 85% 70%, rgba(255, 228, 196, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(255, 235, 205, 0.3) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 218, 185, 0.2) 0%, rgba(255, 228, 196, 0.2) 50%, rgba(255, 235, 205, 0.2) 100%);
             font-family: 'Arial', 'Microsoft YaHei', sans-serif;
-            color: #ffffff;
+            color: #5c4a3a;
             position: relative;
+            animation: gradientBG 15s ease infinite;
         }
 
         @keyframes gradientBG {
@@ -48,7 +54,7 @@
             position: absolute;
             color: #5c4a3a;
             font-family: 'Arial', sans-serif;
-            font-size: 2.2rem;
+            font-size: 1.6rem;
             text-align: center;
             opacity: 0;
             text-shadow:
@@ -61,7 +67,7 @@
             transition: all 0.5s ease-out;
             white-space: nowrap;
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 10px;
             background: rgba(248, 232, 216, 0.4);
             backdrop-filter: blur(5px);
@@ -109,12 +115,12 @@
 
         .footer {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 0;
             right: 0;
             text-align: center;
             color: #5c4a3a;
-            font-size: 18px;
+            font-size: 14px;
             z-index: 2;
             font-family: 'Arial', sans-serif;
             text-shadow: 0 0 10px rgba(255, 218, 185, 0.5);
@@ -136,41 +142,25 @@
             opacity: 0.8;
         }
 
-        .stars-container {
-            position: fixed;
+        .stars {
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             z-index: 0;
-            overflow: hidden;
         }
 
         .star {
             position: absolute;
-            background-color: #fff;
+            background-color: #ffdab9;
             border-radius: 50%;
-            animation: twinkle var(--duration) infinite ease-in-out;
-            opacity: 0;
+            animation: twinkle 3s infinite ease-in-out;
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-
-        .shooting-star {
-            position: absolute;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
-            animation: shoot var(--duration) linear infinite;
-            opacity: 0;
-        }
-
-        @keyframes shoot {
-            0% { transform: translateX(0) translateY(0) rotate(45deg); opacity: 1; }
-            100% { transform: translateX(1000px) translateY(1000px) rotate(45deg); opacity: 0; }
+            0%, 100% { opacity: 0.4; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
         .floating-element {
@@ -204,18 +194,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 85%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 500px;
             text-align: center;
             z-index: 5;
             opacity: 0;
             transition: opacity 1.2s ease-in-out;
-            padding: 30px;
+            padding: 20px;
             background: rgba(248, 232, 216, 0.7);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
+            border-radius: 15px;
             border: 1px solid rgba(255, 218, 185, 0.4);
-            box-shadow: 0 0 30px rgba(255, 204, 102, 0.3);
+            box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
         }
 
         .greeting-message.active {
@@ -224,8 +214,8 @@
 
         .greeting-message h2 {
             color: #8b6b4a;
-            font-size: 36px;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 15px;
             text-shadow: 0 0 15px rgba(230, 201, 184, 0.6);
             font-weight: bold;
             letter-spacing: 1px;
@@ -233,20 +223,22 @@
 
         .greeting-message p {
             color: #5c4a3a;
-            font-size: 20px;
-            line-height: 1.8;
-            margin: 15px 0;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
         }
 
         .family-silhouette {
             position: absolute;
-            bottom: 30%;
+            bottom: 25%;
             left: 50%;
             transform: translateX(-50%);
             z-index: 4;
             opacity: 0.8;
             filter: drop-shadow(0 0 15px rgba(255, 204, 102, 0.6));
             transition: opacity 1s ease;
+            width: 200px;
+            height: 120px;
         }
 
         .family-silhouette.active {
@@ -301,110 +293,28 @@
 
         @media (max-width: 768px) {
             .greeting-message {
-                width: 90%;
-                padding: 20px;
+                width: 85%;
+                padding: 15px;
             }
 
-            .greeting-message h2 {
-                font-size: 28px;
-            }
-
-            .greeting-message p {
-                font-size: 18px;
-            }
-
-            .message {
-                font-size: 1.8rem;
-                padding: 8px 16px;
-            }
-
-            .gift-envelope {
-                width: 160px;
-                height: 100px;
-                bottom: 10%;
-            }
-
-            .envelope-front {
-                font-size: 20px;
-            }
-
-            .envelope-back {
-                font-size: 14px;
-                padding: 10px;
-            }
-
-            .blessing-frame {
-                width: 160px;
-                height: 100px;
-                font-size: 16px;
-                padding: 10px;
-            }
-
-            .music-control {
-                width: 40px;
-                height: 40px;
-                top: 15px;
-                right: 15px;
-            }
-
-            .music-control i {
-                font-size: 18px;
-            }
-
-            .music-list {
-                top: 65px;
-                right: 15px;
-                padding: 8px;
-            }
-
-            .music-item {
-                padding: 6px 12px;
-                font-size: 14px;
-            }
-
-            .footer {
-                font-size: 16px;
-                bottom: 15px;
-            }
-
-            .family-silhouette {
-                width: 200px;
-                height: 120px;
-                bottom: 25%;
-            }
-
-            .curtain-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .curtain-content p {
-                font-size: 1.2rem;
-            }
-
-            .floating-text {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .greeting-message h2 {
                 font-size: 24px;
             }
 
             .greeting-message p {
-                font-size: 16px;
-                line-height: 1.6;
+                font-size: 14px;
+                line-height: 1.5;
             }
 
             .message {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
                 padding: 6px 12px;
             }
 
             .gift-envelope {
                 width: 140px;
                 height: 90px;
-                bottom: 8%;
+                bottom: 10%;
             }
 
             .envelope-front {
@@ -419,45 +329,23 @@
             .blessing-frame {
                 width: 140px;
                 height: 90px;
-                font-size: 14px;
+                font-size: 12px;
                 padding: 8px;
             }
 
-            .music-control {
-                width: 35px;
-                height: 35px;
-                top: 10px;
-                right: 10px;
-            }
-
-            .music-control i {
-                font-size: 16px;
-            }
-
-            .music-list {
-                top: 55px;
-                right: 10px;
-                padding: 6px;
-            }
-
-            .music-item {
-                padding: 5px 10px;
-                font-size: 12px;
-            }
-
             .footer {
-                font-size: 14px;
-                bottom: 10px;
+                font-size: 12px;
+                bottom: 12px;
             }
 
             .family-silhouette {
                 width: 180px;
                 height: 108px;
-                bottom: 20%;
+                bottom: 22%;
             }
 
             .curtain-content h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .curtain-content p {
@@ -466,6 +354,74 @@
 
             .floating-text {
                 font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .greeting-message {
+                width: 80%;
+                padding: 12px;
+            }
+
+            .greeting-message h2 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .greeting-message p {
+                font-size: 12px;
+                line-height: 1.4;
+                margin: 8px 0;
+            }
+
+            .message {
+                font-size: 1.2rem;
+                padding: 5px 10px;
+            }
+
+            .gift-envelope {
+                width: 120px;
+                height: 80px;
+                bottom: 8%;
+            }
+
+            .envelope-front {
+                font-size: 16px;
+            }
+
+            .envelope-back {
+                font-size: 10px;
+                padding: 6px;
+            }
+
+            .blessing-frame {
+                width: 120px;
+                height: 80px;
+                font-size: 10px;
+                padding: 6px;
+            }
+
+            .footer {
+                font-size: 10px;
+                bottom: 10px;
+            }
+
+            .family-silhouette {
+                width: 160px;
+                height: 96px;
+                bottom: 20%;
+            }
+
+            .curtain-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .curtain-content p {
+                font-size: 0.9rem;
+            }
+
+            .floating-text {
+                font-size: 10px;
             }
         }
 
@@ -490,15 +446,163 @@
                 padding-left: max(0px, env(safe-area-inset-left));
                 padding-right: max(0px, env(safe-area-inset-right));
                 padding-bottom: max(0px, env(safe-area-inset-bottom));
+                padding-top: max(0px, env(safe-area-inset-top));
             }
 
             .music-control {
                 top: max(20px, env(safe-area-inset-top) + 20px);
+                right: max(20px, env(safe-area-inset-right) + 20px);
             }
 
             .footer {
                 bottom: max(20px, env(safe-area-inset-bottom) + 20px);
             }
+
+            .greeting-message {
+                margin-top: max(0px, env(safe-area-inset-top));
+            }
+
+            .gift-envelope {
+                bottom: max(12%, env(safe-area-inset-bottom) + 12%);
+            }
+        }
+
+        /* iPhone X 及以上设备特定样式 */
+        @media screen and (device-width: 375px) and (device-height: 812px),
+               screen and (device-width: 390px) and (device-height: 844px),
+               screen and (device-width: 428px) and (device-height: 926px),
+               screen and (device-width: 430px) and (device-height: 932px) {
+            .greeting-message {
+                width: 85%;
+                padding: 15px;
+                margin-top: env(safe-area-inset-top);
+            }
+
+            .greeting-message h2 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            .greeting-message p {
+                font-size: 14px;
+                line-height: 1.5;
+                margin: 8px 0;
+            }
+
+            .message {
+                font-size: 1.3rem;
+                padding: 6px 12px;
+            }
+
+            .gift-envelope {
+                width: 140px;
+                height: 90px;
+                bottom: calc(env(safe-area-inset-bottom) + 12%);
+            }
+
+            .envelope-front {
+                font-size: 18px;
+            }
+
+            .envelope-back {
+                font-size: 12px;
+                padding: 8px;
+                line-height: 1.4;
+            }
+
+            .blessing-frame {
+                width: 140px;
+                height: 90px;
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .music-control {
+                width: 40px;
+                height: 40px;
+                top: calc(env(safe-area-inset-top) + 20px);
+                right: calc(env(safe-area-inset-right) + 20px);
+            }
+
+            .music-control i {
+                font-size: 18px;
+            }
+
+            .music-list {
+                top: calc(env(safe-area-inset-top) + 70px);
+                right: calc(env(safe-area-inset-right) + 20px);
+                padding: 8px;
+            }
+
+            .music-item {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .footer {
+                font-size: 12px;
+                bottom: calc(env(safe-area-inset-bottom) + 15px);
+            }
+
+            .family-silhouette {
+                width: 180px;
+                height: 108px;
+                bottom: calc(env(safe-area-inset-bottom) + 25%);
+            }
+
+            .curtain-content h1 {
+                font-size: 1.8rem;
+                margin-top: env(safe-area-inset-top);
+            }
+
+            .curtain-content p {
+                font-size: 1rem;
+            }
+
+            .floating-text {
+                font-size: 12px;
+            }
+
+            /* 优化烟花效果 */
+            canvas {
+                transform: scale(0.9);
+            }
+
+            /* 优化交互区域 */
+            .interactive-area {
+                touch-action: manipulation;
+            }
+
+            /* 优化动画性能 */
+            .gift-envelope,
+            .blessing-frame,
+            .floating-text {
+                will-change: transform;
+            }
+
+            /* 优化文字显示 */
+            .message,
+            .greeting-message,
+            .footer {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            /* 优化触摸反馈 */
+            .gift-envelope:active,
+            .music-control:active {
+                transform: scale(0.95);
+            }
+
+            /* 优化内存使用 */
+            .particle {
+                transform: translateZ(0);
+            }
+        }
+
+        /* 添加 viewport-fit=cover 支持 */
+        @viewport {
+            viewport-fit: cover;
         }
 
         .floating-photos {
@@ -511,12 +615,12 @@
 
         .blessing-frame {
             position: absolute;
-            width: 200px;
-            height: 120px;
+            width: 160px;
+            height: 100px;
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 204, 102, 0.5);
             border-radius: 10px;
-            padding: 15px;
+            padding: 10px;
             transform: rotate(var(--rotation));
             animation: float 6s ease-in-out infinite;
             box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
@@ -526,7 +630,7 @@
             justify-content: center;
             text-align: center;
             color: #8b6b4a;
-            font-size: 18px;
+            font-size: 14px;
             line-height: 1.6;
             font-weight: bold;
         }
@@ -568,7 +672,7 @@
         .floating-text {
             position: absolute;
             color: rgba(255, 204, 102, 0.8);
-            font-size: 16px;
+            font-size: 14px;
             white-space: nowrap;
             pointer-events: none;
             animation: floatText 15s linear infinite;
@@ -663,7 +767,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: #8b6b4a;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             text-align: center;
             opacity: 0;
             transition: opacity 0.5s ease;
@@ -677,13 +781,13 @@
 
         .curtain-content h1 {
             margin-bottom: 20px;
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: #8b6b4a;
             text-shadow: 0 0 20px rgba(230, 201, 184, 0.6);
         }
 
         .curtain-content p {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #8b6b4a;
         }
 
@@ -774,9 +878,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 218, 185, 0.1) 0%, transparent 70%);
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 218, 185, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 228, 196, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 235, 205, 0.2) 0%, transparent 70%);
             pointer-events: none;
-            z-index: 1;
+            z-index: 2;
             animation: pulseGlow 8s ease-in-out infinite;
         }
 
@@ -793,18 +900,18 @@
 
         .gift-envelope {
             position: absolute;
-            bottom: 15%;
+            bottom: 12%;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
-            height: 120px;
+            width: 160px;
+            height: 100px;
             background: #f8e8d8;
             border: 2px solid #e6d5c3;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             z-index: 10;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
+            box-shadow: 0 0 15px rgba(255, 204, 102, 0.3);
             overflow: hidden;
         }
 
@@ -816,7 +923,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             color: #8b6b4a;
             font-weight: bold;
             transition: transform 0.5s ease;
@@ -832,9 +939,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             color: #5c4a3a;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             line-height: 1.6;
             transform: rotateY(180deg);
@@ -870,164 +977,6 @@
             0% { transform: translateX(-100%) rotate(45deg); }
             100% { transform: translateX(100%) rotate(45deg); }
         }
-
-        /* iPhone 6/7/8 特定适配 */
-        @media screen and (device-width: 375px) and (device-height: 667px) {
-            .greeting-message {
-                width: 85%;
-                padding: 15px;
-                top: 45%;
-            }
-
-            .greeting-message h2 {
-                font-size: 22px;
-                margin-bottom: 15px;
-            }
-
-            .greeting-message p {
-                font-size: 15px;
-                line-height: 1.5;
-                margin: 10px 0;
-            }
-
-            .message {
-                font-size: 1.3rem;
-                padding: 6px 12px;
-            }
-
-            .gift-envelope {
-                width: 130px;
-                height: 85px;
-                bottom: 12%;
-            }
-
-            .envelope-front {
-                font-size: 16px;
-            }
-
-            .envelope-back {
-                font-size: 11px;
-                padding: 8px;
-                line-height: 1.4;
-            }
-
-            .blessing-frame {
-                width: 130px;
-                height: 85px;
-                font-size: 13px;
-                padding: 8px;
-            }
-
-            .music-control {
-                width: 32px;
-                height: 32px;
-                top: 12px;
-                right: 12px;
-            }
-
-            .music-control i {
-                font-size: 15px;
-            }
-
-            .music-list {
-                top: 50px;
-                right: 12px;
-                padding: 6px;
-            }
-
-            .music-item {
-                padding: 4px 8px;
-                font-size: 11px;
-            }
-
-            .footer {
-                font-size: 13px;
-                bottom: 12px;
-            }
-
-            .family-silhouette {
-                width: 160px;
-                height: 96px;
-                bottom: 22%;
-            }
-
-            .curtain-content h1 {
-                font-size: 1.8rem;
-            }
-
-            .curtain-content p {
-                font-size: 0.9rem;
-            }
-
-            .floating-text {
-                font-size: 11px;
-            }
-
-            /* 优化烟花效果 */
-            canvas {
-                transform: scale(0.9);
-            }
-
-            /* 优化交互区域 */
-            .interactive-area {
-                touch-action: manipulation;
-            }
-
-            /* 优化动画性能 */
-            .gift-envelope,
-            .blessing-frame,
-            .floating-text {
-                will-change: transform;
-            }
-
-            /* 优化文字显示 */
-            .message,
-            .greeting-message,
-            .footer {
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-
-            /* 优化触摸反馈 */
-            .gift-envelope:active,
-            .music-control:active {
-                transform: scale(0.95);
-            }
-
-            /* 优化内存使用 */
-            .particle {
-                transform: translateZ(0);
-            }
-        }
-
-        /* iPhone 6/7/8 Plus 特定适配 */
-        @media screen and (device-width: 414px) and (device-height: 736px) {
-            .greeting-message {
-                width: 80%;
-                padding: 20px;
-            }
-
-            .greeting-message h2 {
-                font-size: 24px;
-            }
-
-            .greeting-message p {
-                font-size: 16px;
-            }
-
-            .gift-envelope {
-                width: 150px;
-                height: 95px;
-            }
-
-            .envelope-front {
-                font-size: 18px;
-            }
-
-            .envelope-back {
-                font-size: 12px;
-            }
-        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
@@ -1043,7 +992,7 @@
     <div class="background-particles" id="backgroundParticles"></div>
     <div class="light-beam"></div>
     <div class="warm-glow"></div>
-    <div class="stars-container" id="starsContainer"></div>
+    <div class="stars" id="stars"></div>
     <div class="mountains"></div>
     <div class="family-silhouette" id="familySilhouette">
         <svg width="250" height="150" viewBox="0 0 250 150">
@@ -1105,54 +1054,95 @@
     </div>
 
     <script>
-        // 创建星星背景
+        // 创建星空背景
         function createStars() {
-            const container = document.getElementById('starsContainer');
-            const starCount = 200;
-            const shootingStarCount = 3;
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 200;
 
-            // 创建普通星星
-            for (let i = 0; i < starCount; i++) {
+            for (let i = 0; i < starsCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
-                // 随机大小
-                const size = Math.random() * 2 + 1;
+
+                // 随机位置和大小
+                const size = Math.random() * 3 + 1;
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 4 + 2;
+
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
-                
-                // 随机位置
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                
-                // 随机动画持续时间
-                const duration = Math.random() * 3 + 2;
-                star.style.setProperty('--duration', `${duration}s`);
-                
-                // 随机动画延迟
-                star.style.animationDelay = `${Math.random() * duration}s`;
-                
-                container.appendChild(star);
-            }
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDelay = `${delay}s`;
+                star.style.animationDuration = `${duration}s`;
 
-            // 创建流星
-            for (let i = 0; i < shootingStarCount; i++) {
-                const shootingStar = document.createElement('div');
-                shootingStar.className = 'shooting-star';
-                
-                // 随机位置
-                shootingStar.style.left = `${Math.random() * 50}%`;
-                shootingStar.style.top = `${Math.random() * 30}%`;
-                
-                // 随机动画持续时间
-                const duration = Math.random() * 2 + 3;
-                shootingStar.style.setProperty('--duration', `${duration}s`);
-                
-                // 随机动画延迟
-                shootingStar.style.animationDelay = `${Math.random() * 10}s`;
-                
-                container.appendChild(shootingStar);
+                starsContainer.appendChild(star);
             }
+        }
+        createStars();
+
+        // 创建漂浮元素（心形、星星等）
+        function createFloatingElement(x, y, type) {
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+
+            // 不同类型元素
+            const elements = {
+                'heart': '❤️',
+                'star': '⭐',
+                'smile': '😊',
+                'sun': '☀️',
+                'father': '👨',
+                'child': '👶',
+                'gift': '🎁',
+                'crown': '👑',
+                'trophy': '🏆',
+                'flower': '🌸',
+                'moon': '🌙',
+                'cloud': '☁️',
+                'rainbow': '🌈',
+                'dove': '🕊️',
+                'tree': '🌳'
+            };
+
+            element.innerHTML = elements[type] || elements['heart'];
+
+            // 随机大小和动画持续时间
+            const size = Math.random() * 20 + 15;
+            const duration = Math.random() * 4 + 5;
+            const color = type === 'heart' ? '#ff4d6d' :
+                         type === 'star' ? '#ffcc66' :
+                         type === 'smile' ? '#ffdd33' :
+                         type === 'sun' ? '#ff9900' : '#66ccff';
+
+            element.style.color = color;
+            element.style.fontSize = `${size}px`;
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+            element.style.animationDuration = `${duration}s`;
+            element.style.animationDelay = `${Math.random() * 2}s`;
+
+            document.body.appendChild(element);
+
+            // 动画结束后移除元素
+            setTimeout(() => {
+                element.remove();
+            }, duration * 1000);
+        }
+
+        // 创建心形脉冲效果
+        function createHeartPulse(x, y) {
+            const pulse = document.createElement('div');
+            pulse.className = 'heart-pulse';
+            pulse.style.left = `${x}px`;
+            pulse.style.top = `${y}px`;
+
+            document.body.appendChild(pulse);
+
+            setTimeout(() => {
+                pulse.remove();
+            }, 2000);
         }
 
         // 获取DOM元素
@@ -1614,7 +1604,6 @@
         // 初始化
         window.addEventListener('load', () => {
             initCurtain();
-            createStars();
             createBackgroundParticles();
             createFloatingPhotos();
             createFloatingTexts();
