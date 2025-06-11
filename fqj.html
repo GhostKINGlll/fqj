@@ -977,6 +977,329 @@
             0% { transform: translateX(-100%) rotate(45deg); }
             100% { transform: translateX(100%) rotate(45deg); }
         }
+
+        /* 安卓设备适配 */
+        @media screen and (min-width: 360px) and (max-width: 480px) {
+            /* 小屏安卓设备 (如: 360x640, 360x720) */
+            .greeting-message {
+                width: 90%;
+                padding: 12px;
+                margin-top: 10px;
+            }
+
+            .greeting-message h2 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .greeting-message p {
+                font-size: 14px;
+                line-height: 1.4;
+                margin: 8px 0;
+            }
+
+            .message {
+                font-size: 1.2rem;
+                padding: 5px 10px;
+            }
+
+            .gift-envelope {
+                width: 130px;
+                height: 85px;
+                bottom: 10%;
+            }
+
+            .envelope-front {
+                font-size: 16px;
+            }
+
+            .envelope-back {
+                font-size: 11px;
+                padding: 6px;
+                line-height: 1.3;
+            }
+
+            .blessing-frame {
+                width: 130px;
+                height: 85px;
+                font-size: 11px;
+                padding: 6px;
+            }
+
+            .music-control {
+                width: 36px;
+                height: 36px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .music-control i {
+                font-size: 16px;
+            }
+
+            .music-list {
+                top: 60px;
+                right: 15px;
+                padding: 6px;
+            }
+
+            .music-item {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            .footer {
+                font-size: 12px;
+                bottom: 12px;
+            }
+
+            .family-silhouette {
+                width: 160px;
+                height: 96px;
+                bottom: 22%;
+            }
+
+            .curtain-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .curtain-content p {
+                font-size: 0.9rem;
+            }
+
+            .floating-text {
+                font-size: 11px;
+            }
+        }
+
+        @media screen and (min-width: 481px) and (max-width: 768px) {
+            /* 中等屏幕安卓设备 (如: 480x800, 540x960) */
+            .greeting-message {
+                width: 85%;
+                padding: 15px;
+                margin-top: 15px;
+            }
+
+            .greeting-message h2 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            .greeting-message p {
+                font-size: 15px;
+                line-height: 1.5;
+                margin: 10px 0;
+            }
+
+            .message {
+                font-size: 1.3rem;
+                padding: 6px 12px;
+            }
+
+            .gift-envelope {
+                width: 150px;
+                height: 95px;
+                bottom: 12%;
+            }
+
+            .envelope-front {
+                font-size: 18px;
+            }
+
+            .envelope-back {
+                font-size: 12px;
+                padding: 8px;
+                line-height: 1.4;
+            }
+
+            .blessing-frame {
+                width: 150px;
+                height: 95px;
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            .music-control {
+                width: 40px;
+                height: 40px;
+                top: 20px;
+                right: 20px;
+            }
+
+            .music-control i {
+                font-size: 18px;
+            }
+
+            .music-list {
+                top: 70px;
+                right: 20px;
+                padding: 8px;
+            }
+
+            .music-item {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .footer {
+                font-size: 14px;
+                bottom: 15px;
+            }
+
+            .family-silhouette {
+                width: 180px;
+                height: 108px;
+                bottom: 25%;
+            }
+
+            .curtain-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .curtain-content p {
+                font-size: 1rem;
+            }
+
+            .floating-text {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            /* 大屏安卓设备 (如: 768x1024, 800x1280) */
+            .greeting-message {
+                width: 80%;
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            .greeting-message h2 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            .greeting-message p {
+                font-size: 16px;
+                line-height: 1.6;
+                margin: 12px 0;
+            }
+
+            .message {
+                font-size: 1.4rem;
+                padding: 8px 16px;
+            }
+
+            .gift-envelope {
+                width: 180px;
+                height: 110px;
+                bottom: 15%;
+            }
+
+            .envelope-front {
+                font-size: 20px;
+            }
+
+            .envelope-back {
+                font-size: 14px;
+                padding: 10px;
+                line-height: 1.5;
+            }
+
+            .blessing-frame {
+                width: 180px;
+                height: 110px;
+                font-size: 15px;
+                padding: 10px;
+            }
+
+            .music-control {
+                width: 45px;
+                height: 45px;
+                top: 25px;
+                right: 25px;
+            }
+
+            .music-control i {
+                font-size: 20px;
+            }
+
+            .music-list {
+                top: 80px;
+                right: 25px;
+                padding: 10px;
+            }
+
+            .music-item {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .footer {
+                font-size: 16px;
+                bottom: 20px;
+            }
+
+            .family-silhouette {
+                width: 220px;
+                height: 132px;
+                bottom: 28%;
+            }
+
+            .curtain-content h1 {
+                font-size: 2rem;
+            }
+
+            .curtain-content p {
+                font-size: 1.2rem;
+            }
+
+            .floating-text {
+                font-size: 14px;
+            }
+        }
+
+        /* 安卓设备通用优化 */
+        @media screen and (max-width: 1024px) {
+            /* 触摸优化 */
+            .gift-envelope,
+            .music-control,
+            .music-item {
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* 性能优化 */
+            .gift-envelope,
+            .blessing-frame,
+            .floating-text {
+                will-change: transform;
+                transform: translateZ(0);
+            }
+
+            /* 文字渲染优化 */
+            .message,
+            .greeting-message,
+            .footer {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            /* 动画性能优化 */
+            .particle {
+                transform: translateZ(0);
+            }
+
+            /* 触摸反馈优化 */
+            .gift-envelope:active,
+            .music-control:active {
+                transform: scale(0.95);
+            }
+
+            /* 滚动优化 */
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
