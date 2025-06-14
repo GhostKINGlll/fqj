@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父亲节快乐 · 感恩有您</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8e8d8 0%, #e6d5c3 50%, #f8e8d8 100%);
+            background-image: radial-gradient(circle at 15% 25%, rgba(255, 218, 185, 0.4) 0%, transparent 25%),
+            radial-gradient(circle at 85% 70%, rgba(255, 228, 196, 0.4) 0%, transparent 25%),
+            radial-gradient(circle at 50% 50%, rgba(255, 235, 205, 0.3) 0%, transparent 50%),
+            linear-gradient(45deg, rgba(255, 218, 185, 0.2) 0%, rgba(255, 228, 196, 0.2) 50%, rgba(255, 235, 205, 0.2) 100%);
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+            color: #5c4a3a;
+            position: relative;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+                background-size: 200% 200%;
+            }
+            50% {
+                background-position: 100% 50%;
+                background-size: 200% 200%;
+            }
+            100% {
+                background-position: 0% 50%;
+                background-size: 200% 200%;
+            }
+        }
+
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .message {
+            position: absolute;
+            color: #5c4a3a;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.6rem;
+            text-align: center;
+            opacity: 0;
+            text-shadow: 0 0 15px rgba(255, 218, 185, 0.8),
+            0 0 30px rgba(255, 228, 196, 0.6),
+            0 0 45px rgba(255, 235, 205, 0.4);
+            pointer-events: none;
+            z-index: 3;
+            transform: translate(-50%, -50%) scale(0.5);
+            transition: all 0.5s ease-out;
+            white-space: nowrap;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 10px;
+            background: rgba(248, 232, 216, 0.4);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 218, 185, 0.3);
+        }
+
+        .message.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .message.fade {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .music-control {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(10, 25, 47, 0.7);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 204, 102, 0.5);
+            box-shadow: 0 0 15px rgba(255, 204, 102, 0.3);
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(26, 58, 95, 0.8);
+            box-shadow: 0 0 20px rgba(255, 204, 102, 0.5);
+        }
+
+        .music-control i {
+            color: #ffcc66;
+            font-size: 22px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #5c4a3a;
+            font-size: 14px;
+            z-index: 2;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 0 0 10px rgba(255, 218, 185, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .mountains {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            z-index: 0;
+            background-image: linear-gradient(to top, #e6c9b8 0%, transparent 100%),
+            url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23f5e6d3" fill-opacity="1" d="M0,160L48,149.3C96,139,192,117,288,128C384,139,480,181,576,176C672,171,768,117,864,112C960,107,1056,149,1152,160C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffdab9;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            animation: floatElement 6s ease-in-out forwards;
+            z-index: 2;
+            text-shadow: 0 0 10px rgba(255, 204, 102, 0.8);
+        }
+
+        @keyframes floatElement {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .greeting-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            padding: 20px;
+            background: rgba(248, 232, 216, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 218, 185, 0.4);
+            box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
+        }
+
+        .greeting-message.active {
+            opacity: 1;
+        }
+
+        .greeting-message h2 {
+            color: #8b6b4a;
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(230, 201, 184, 0.6);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .greeting-message p {
+            color: #5c4a3a;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .family-silhouette {
+            position: absolute;
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 15px rgba(255, 204, 102, 0.6));
+            transition: opacity 1s ease;
+            width: 200px;
+            height: 120px;
+        }
+
+        .family-silhouette.active {
+            opacity: 1;
+        }
+
+        .interactive-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        .heart-pulse {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .heart-pulse::before,
+        .heart-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff4d6d"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center no-repeat;
+            background-size: contain;
+            animation: pulse 2s infinite;
+            opacity: 0;
+        }
+
+        .heart-pulse::after {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .greeting-message {
+                width: 85%;
+                padding: 15px;
+            }
+
+            .greeting-message h2 {
+                font-size: 24px;
+            }
+
+            .greeting-message p {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .message {
+                font-size: 1.4rem;
+                padding: 6px 12px;
+            }
+
+            .gift-envelope {
+                width: 140px;
+                height: 90px;
+                bottom: 10%;
+            }
+
+            .envelope-front {
+                font-size: 18px;
+            }
+
+            .envelope-back {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .blessing-frame {
+                width: 140px;
+                height: 90px;
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .footer {
+                font-size: 12px;
+                bottom: 12px;
+            }
+
+            .family-silhouette {
+                width: 180px;
+                height: 108px;
+                bottom: 22%;
+            }
+
+            .curtain-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .curtain-content p {
+                font-size: 1rem;
+            }
+
+            .floating-text {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .greeting-message {
+                width: 80%;
+                padding: 12px;
+            }
+
+            .greeting-message h2 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .greeting-message p {
+                font-size: 12px;
+                line-height: 1.4;
+                margin: 8px 0;
+            }
+
+            .message {
+                font-size: 1.2rem;
+                padding: 5px 10px;
+            }
+
+            .gift-envelope {
+                width: 120px;
+                height: 80px;
+                bottom: 8%;
+            }
+
+            .envelope-front {
+                font-size: 16px;
+            }
+
+            .envelope-back {
+                font-size: 10px;
+                padding: 6px;
+            }
+
+            .blessing-frame {
+                width: 120px;
+                height: 80px;
+                font-size: 10px;
+                padding: 6px;
+            }
+
+            .footer {
+                font-size: 10px;
+                bottom: 10px;
+            }
+
+            .family-silhouette {
+                width: 160px;
+                height: 96px;
+                bottom: 20%;
+            }
+
+            .curtain-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .curtain-content p {
+                font-size: 0.9rem;
+            }
+
+            .floating-text {
+                font-size: 10px;
+            }
+        }
+
+        /* 添加触摸设备优化 */
+        @media (hover: none) {
+            .gift-envelope:hover {
+                transform: translateX(-50%) scale(1);
+            }
+
+            .gift-envelope:active {
+                transform: translateX(-50%) scale(0.95);
+            }
+        }
+
+        /* 添加安全区域适配 */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+                padding-top: max(0px, env(safe-area-inset-top));
+            }
+
+            .music-control {
+                top: max(20px, env(safe-area-inset-top) + 20px);
+                right: max(20px, env(safe-area-inset-right) + 20px);
+            }
+
+            .footer {
+                bottom: max(20px, env(safe-area-inset-bottom) + 20px);
+            }
+
+            .greeting-message {
+                margin-top: max(0px, env(safe-area-inset-top));
+            }
+
+            .gift-envelope {
+                bottom: max(12%, env(safe-area-inset-bottom) + 12%);
+            }
+        }
+
+        /* iPhone X 及以上设备特定样式 */
+        @media screen and (device-width: 375px) and (device-height: 812px), screen and (device-width: 390px) and (device-height: 844px), screen and (device-width: 428px) and (device-height: 926px), screen and (device-width: 430px) and (device-height: 932px) {
+            .greeting-message {
+                width: 85%;
+                padding: 15px;
+                margin-top: env(safe-area-inset-top);
+            }
+
+            .greeting-message h2 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            .greeting-message p {
+                font-size: 14px;
+                line-height: 1.5;
+                margin: 8px 0;
+            }
+
+            .message {
+                font-size: 1.3rem;
+                padding: 6px 12px;
+            }
+
+            .gift-envelope {
+                width: 140px;
+                height: 90px;
+                bottom: calc(env(safe-area-inset-bottom) + 12%);
+            }
+
+            .envelope-front {
+                font-size: 18px;
+            }
+
+            .envelope-back {
+                font-size: 12px;
+                padding: 8px;
+                line-height: 1.4;
+            }
+
+            .blessing-frame {
+                width: 140px;
+                height: 90px;
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .music-control {
+                width: 40px;
+                height: 40px;
+                top: calc(env(safe-area-inset-top) + 20px);
+                right: calc(env(safe-area-inset-right) + 20px);
+            }
+
+            .music-control i {
+                font-size: 18px;
+            }
+
+            .music-list {
+                top: calc(env(safe-area-inset-top) + 70px);
+                right: calc(env(safe-area-inset-right) + 20px);
+                padding: 8px;
+            }
+
+            .music-item {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .footer {
+                font-size: 12px;
+                bottom: calc(env(safe-area-inset-bottom) + 15px);
+            }
+
+            .family-silhouette {
+                width: 180px;
+                height: 108px;
+                bottom: calc(env(safe-area-inset-bottom) + 25%);
+            }
+
+            .curtain-content h1 {
+                font-size: 1.8rem;
+                margin-top: env(safe-area-inset-top);
+            }
+
+            .curtain-content p {
+                font-size: 1rem;
+            }
+
+            .floating-text {
+                font-size: 12px;
+            }
+
+            /* 优化烟花效果 */
+            canvas {
+                transform: scale(0.9);
+            }
+
+            /* 优化交互区域 */
+            .interactive-area {
+                touch-action: manipulation;
+            }
+
+            /* 优化动画性能 */
+            .gift-envelope,
+            .blessing-frame,
+            .floating-text {
+                will-change: transform;
+            }
+
+            /* 优化文字显示 */
+            .message,
+            .greeting-message,
+            .footer {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            /* 优化触摸反馈 */
+            .gift-envelope:active,
+            .music-control:active {
+                transform: scale(0.95);
+            }
+
+            /* 优化内存使用 */
+            .particle {
+                transform: translateZ(0);
+            }
+        }
+
+        /* 添加 viewport-fit=cover 支持 */
+        @viewport {
+            viewport-fit: cover;
+        }
+
+        .floating-photos {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .blessing-frame {
+            position: absolute;
+            width: 160px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 204, 102, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+            transform: rotate(var(--rotation));
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 204, 102, 0.3);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #8b6b4a;
+            font-size: 14px;
+            line-height: 1.6;
+            font-weight: bold;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(var(--rotation));
+            }
+            50% {
+                transform: translateY(-20px) rotate(var(--rotation));
+            }
+        }
+
+        .memory-card {
+            position: absolute;
+            width: 200px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            color: #fff;
+            font-size: 14px;
+            line-height: 1.4;
+            transform: rotate(var(--rotation));
+            animation: float 8s ease-in-out infinite;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 204, 102, 0.3);
+            box-shadow: 0 0 20px rgba(255, 204, 102, 0.2);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .memory-card.active {
+            opacity: 1;
+        }
+
+        .memory-card h3 {
+            color: #ffcc66;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .floating-text {
+            position: absolute;
+            color: rgba(255, 204, 102, 0.8);
+            font-size: 14px;
+            white-space: nowrap;
+            pointer-events: none;
+            animation: floatText 15s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 204, 102, 0.5);
+        }
+
+        @keyframes floatText {
+            0% {
+                transform: translateX(100vw) translateY(var(--y));
+            }
+            100% {
+                transform: translateX(-100%) translateY(var(--y));
+            }
+        }
+
+        .interactive-button {
+            position: absolute;
+            padding: 10px 20px;
+            background: rgba(245, 230, 211, 0.3);
+            border: 1px solid rgba(255, 218, 185, 0.5);
+            border-radius: 20px;
+            color: #4a4a4a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .interactive-button:hover {
+            background: rgba(245, 230, 211, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 218, 185, 0.4);
+        }
+
+        .music-list {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            background: rgba(245, 230, 211, 0.9);
+            border-radius: 10px;
+            padding: 10px;
+            display: none;
+            z-index: 11;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 218, 185, 0.4);
+        }
+
+        .music-item {
+            padding: 8px 15px;
+            color: #4a4a4a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .music-item:hover {
+            background: rgba(255, 218, 185, 0.2);
+            color: #e6c9b8;
+        }
+
+        .curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f8e8d8;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .curtain-left {
+            transform-origin: left;
+            background: linear-gradient(90deg, #f8e8d8 0%, #e6d5c3 100%);
+        }
+
+        .curtain-right {
+            transform-origin: right;
+            background: linear-gradient(90deg, #e6d5c3 0%, #f8e8d8 100%);
+        }
+
+        .curtain.open-left {
+            transform: translateX(-100%);
+        }
+
+        .curtain.open-right {
+            transform: translateX(100%);
+        }
+
+        .curtain-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #8b6b4a;
+            font-size: 2.2rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-shadow: 0 0 20px rgba(230, 201, 184, 0.6);
+            z-index: 1001;
+        }
+
+        .curtain-content.active {
+            opacity: 1;
+        }
+
+        .curtain-content h1 {
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            color: #8b6b4a;
+            text-shadow: 0 0 20px rgba(230, 201, 184, 0.6);
+        }
+
+        .curtain-content p {
+            font-size: 1.2rem;
+            color: #8b6b4a;
+        }
+
+        .curtain-content .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 218, 185, 0.2);
+            margin: 20px auto;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .curtain-content .loading-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background: #e6c9b8;
+            animation: loading 2s ease-in-out infinite;
+            border-radius: 2px;
+        }
+
+        @keyframes loading {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(350%);
+            }
+        }
+
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 218, 185, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: floatParticle 20s infinite ease-in-out;
+        }
+
+        @keyframes floatParticle {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translate(100px, 50px) scale(1.2);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(50px, 100px) scale(0.8);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translate(-50px, 50px) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        .light-beam {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255, 218, 185, 0.15) 25%, rgba(255, 228, 196, 0.15) 50%, rgba(255, 235, 205, 0.15) 75%, transparent 100%),
+            linear-gradient(-45deg, transparent 0%, rgba(255, 218, 185, 0.15) 25%, rgba(255, 228, 196, 0.15) 50%, rgba(255, 235, 205, 0.15) 75%, transparent 100%);
+            animation: rotateBeam 20s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes rotateBeam {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .warm-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 20%, rgba(255, 218, 185, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 228, 196, 0.3) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(255, 235, 205, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        .gift-envelope {
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(calc(-50% + 20px));
+            width: 160px;
+            height: 100px;
+            background: #f8e8d8;
+            border: 2px solid #e6d5c3;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 204, 102, 0.3);
+            overflow: hidden;
+        }
+
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8e8d8 0%, #e6d5c3 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #8b6b4a;
+            font-weight: bold;
+            transition: transform 0.5s ease;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #f8e8d8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #5c4a3a;
+            padding: 12px;
+            text-align: center;
+            line-height: 1.6;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .gift-envelope.open .envelope-front {
+            transform: rotateY(180deg);
+        }
+
+        .gift-envelope.open .envelope-back {
+            transform: rotateY(0);
+        }
+
+        .gift-envelope:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 204, 102, 0.5);
+        }
+
+        .gift-envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        /* 安卓设备适配 */
+        @media screen and (min-width: 360px) and (max-width: 480px) {
+            /* 小屏安卓设备 (如: 360x640, 360x720) */
+            .greeting-message {
+                width: 90%;
+                padding: 12px;
+                margin-top: 10px;
+            }
+
+            .greeting-message h2 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .greeting-message p {
+                font-size: 14px;
+                line-height: 1.4;
+                margin: 8px 0;
+            }
+
+            .message {
+                font-size: 1.2rem;
+                padding: 5px 10px;
+            }
+
+            .gift-envelope {
+                width: 130px;
+                height: 85px;
+                bottom: 10%;
+                left: calc(50% - 60px);
+                transform: translateX(-50%);
+            }
+
+            .gift-envelope:hover,
+            .gift-envelope:active {
+                transform: translateX(-50%);
+            }
+
+            .envelope-front {
+                font-size: 16px;
+            }
+
+            .envelope-back {
+                font-size: 11px;
+                padding: 6px;
+                line-height: 1.3;
+            }
+
+            .blessing-frame {
+                width: 130px;
+                height: 85px;
+                font-size: 11px;
+                padding: 6px;
+            }
+
+            .music-control {
+                width: 36px;
+                height: 36px;
+                top: 15px;
+                right: 15px;
+            }
+
+            .music-control i {
+                font-size: 16px;
+            }
+
+            .music-list {
+                top: 60px;
+                right: 15px;
+                padding: 6px;
+            }
+
+            .music-item {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+
+            .footer {
+                font-size: 12px;
+                bottom: 12px;
+            }
+
+            .family-silhouette {
+                width: 160px;
+                height: 96px;
+                bottom: 22%;
+            }
+
+            .curtain-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .curtain-content p {
+                font-size: 0.9rem;
+            }
+
+            .floating-text {
+                font-size: 11px;
+            }
+        }
+
+        @media screen and (min-width: 481px) and (max-width: 768px) {
+            /* 中等屏幕安卓设备 (如: 480x800, 540x960) */
+            .greeting-message {
+                width: 85%;
+                padding: 15px;
+                margin-top: 15px;
+            }
+
+            .greeting-message h2 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+
+            .greeting-message p {
+                font-size: 15px;
+                line-height: 1.5;
+                margin: 10px 0;
+            }
+
+            .message {
+                font-size: 1.3rem;
+                padding: 6px 12px;
+            }
+
+            .gift-envelope {
+                width: 150px;
+                height: 95px;
+                bottom: 12%;
+            }
+
+            .envelope-front {
+                font-size: 18px;
+            }
+
+            .envelope-back {
+                font-size: 12px;
+                padding: 8px;
+                line-height: 1.4;
+            }
+
+            .blessing-frame {
+                width: 150px;
+                height: 95px;
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            .music-control {
+                width: 40px;
+                height: 40px;
+                top: 20px;
+                right: 20px;
+            }
+
+            .music-control i {
+                font-size: 18px;
+            }
+
+            .music-list {
+                top: 70px;
+                right: 20px;
+                padding: 8px;
+            }
+
+            .music-item {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .footer {
+                font-size: 14px;
+                bottom: 15px;
+            }
+
+            .family-silhouette {
+                width: 180px;
+                height: 108px;
+                bottom: 25%;
+            }
+
+            .curtain-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .curtain-content p {
+                font-size: 1rem;
+            }
+
+            .floating-text {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            /* 大屏安卓设备 (如: 768x1024, 800x1280) */
+            .greeting-message {
+                width: 80%;
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            .greeting-message h2 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            .greeting-message p {
+                font-size: 16px;
+                line-height: 1.6;
+                margin: 12px 0;
+            }
+
+            .message {
+                font-size: 1.4rem;
+                padding: 8px 16px;
+            }
+
+            .gift-envelope {
+                width: 180px;
+                height: 110px;
+                bottom: 15%;
+            }
+
+            .envelope-front {
+                font-size: 20px;
+            }
+
+            .envelope-back {
+                font-size: 14px;
+                padding: 10px;
+                line-height: 1.5;
+            }
+
+            .blessing-frame {
+                width: 180px;
+                height: 110px;
+                font-size: 15px;
+                padding: 10px;
+            }
+
+            .music-control {
+                width: 45px;
+                height: 45px;
+                top: 25px;
+                right: 25px;
+            }
+
+            .music-control i {
+                font-size: 20px;
+            }
+
+            .music-list {
+                top: 80px;
+                right: 25px;
+                padding: 10px;
+            }
+
+            .music-item {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .footer {
+                font-size: 16px;
+                bottom: 20px;
+            }
+
+            .family-silhouette {
+                width: 220px;
+                height: 132px;
+                bottom: 28%;
+            }
+
+            .curtain-content h1 {
+                font-size: 2rem;
+            }
+
+            .curtain-content p {
+                font-size: 1.2rem;
+            }
+
+            .floating-text {
+                font-size: 14px;
+            }
+        }
+
+        /* 安卓设备通用优化 */
+        @media screen and (max-width: 1024px) {
+            /* 触摸优化 */
+            .gift-envelope,
+            .music-control,
+            .music-item {
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* 性能优化 */
+            .gift-envelope,
+            .blessing-frame,
+            .floating-text {
+                will-change: transform;
+                transform: translateZ(0);
+            }
+
+            /* 文字渲染优化 */
+            .message,
+            .greeting-message,
+            .footer {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            /* 动画性能优化 */
+            .particle {
+                transform: translateZ(0);
+            }
+
+            /* 触摸反馈优化 */
+            .gift-envelope:active,
+            .music-control:active {
+                transform: scale(0.95);
+            }
+
+            /* 滚动优化 */
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="curtain curtain-left"></div>
+<div class="curtain curtain-right"></div>
+<div class="curtain-content">
+    <h1>父亲节快乐</h1>
+    <p>献给最亲爱的爸爸</p>
+    <div class="loading-bar"></div>
+</div>
+
+<div class="background-particles" id="backgroundParticles"></div>
+<div class="light-beam"></div>
+<div class="warm-glow"></div>
+<div class="stars" id="stars"></div>
+<div class="mountains"></div>
+<div class="family-silhouette" id="familySilhouette">
+    <svg width="250" height="150" viewBox="0 0 250 150">
+        <path d="M50,120 L60,80 L70,120" stroke="#ffcc66" stroke-width="3" fill="none"/>
+        <circle cx="60" cy="70" r="10" fill="#ffcc66"/>
+        <path d="M120,120 L130,60 L140,120" stroke="#ffcc66" stroke-width="4" fill="none"/>
+        <circle cx="130" cy="50" r="15" fill="#ffcc66"/>
+        <path d="M190,120 L200,90 L210,120" stroke="#ffcc66" stroke-width="3" fill="none"/>
+        <circle cx="200" cy="80" r="8" fill="#ffcc66"/>
+        <path d="M80,120 Q100,100 120,120" stroke="#ffcc66" stroke-width="2" fill="none"/>
+        <path d="M140,120 Q160,100 180,120" stroke="#ffcc66" stroke-width="2" fill="none"/>
+    </svg>
+</div>
+
+<div class="music-control" id="musicToggle">
+    <i class="fa fa-play" id="playIcon"></i>
+    <i class="fa fa-pause hidden" id="pauseIcon"></i>
+</div>
+
+<div class="music-list" id="musicList">
+    <div class="music-item" data-src="fx.mp3">父亲节主题曲</div>
+    <div class="music-item" data-src="fx2.mp3">温馨回忆</div>
+    <div class="music-item" data-src="fx3.mp3">感恩的心</div>
+</div>
+
+<audio id="backgroundMusic" loop>
+    <source src="fx.mp3" type="audio/mpeg">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
+<!-- 问候消息 -->
+<div class="greeting-message" id="greetingMessage">
+    <h2>亲爱的爸爸</h2>
+    <p>
+        父亲节快乐！<br>
+        您是我生命中最温暖的光，<br>
+        感谢您一直以来的守护与付出。<br>
+        您用坚实的臂膀为我遮风挡雨，<br>
+        用无私的爱为我指引方向。<br>
+        您教会我勇敢面对困难，<br>
+        教会我如何成为一个正直的人。<br>
+        您的笑容是我最大的幸福，<br>
+        您的健康是我最大的心愿。<br>
+        愿时光温柔待您，健康快乐每一天！<br>
+        我爱您，爸爸！
+    </p>
+</div>
+
+<div class="footer">父亲节快乐 · 感恩有您 ❤️</div>
+<div class="interactive-area" id="interactiveArea"></div>
+
+<div class="floating-photos" id="floatingPhotos"></div>
+<div class="floating-texts" id="floatingTexts"></div>
+
+<div class="gift-envelope" id="giftEnvelope">
+    <div class="envelope-front">小礼物</div>
+    <div class="envelope-back">凭11616（尾号2285）快递码到中通快递站领取您的小礼物</div>
+</div>
+
+<script>
+    // 创建星空背景
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        const starsCount = 200;
+
+        for (let i = 0; i < starsCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+
+            // 随机位置和大小
+            const size = Math.random() * 3 + 1;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const delay = Math.random() * 5;
+            const duration = Math.random() * 4 + 2;
+
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.animationDelay = `${delay}s`;
+            star.style.animationDuration = `${duration}s`;
+
+            starsContainer.appendChild(star);
+        }
+    }
+
+    createStars();
+
+    // 创建漂浮元素（心形、星星等）
+    function createFloatingElement(x, y, type) {
+        const element = document.createElement('div');
+        element.className = 'floating-element';
+
+        // 不同类型元素
+        const elements = {
+            'heart': '❤️',
+            'star': '⭐',
+            'smile': '😊',
+            'sun': '☀️',
+            'father': '👨',
+            'child': '👶',
+            'gift': '🎁',
+            'crown': '👑',
+            'trophy': '🏆',
+            'flower': '🌸',
+            'moon': '🌙',
+            'cloud': '☁️',
+            'rainbow': '🌈',
+            'dove': '🕊️',
+            'tree': '🌳'
+        };
+
+        element.innerHTML = elements[type] || elements['heart'];
+
+        // 随机大小和动画持续时间
+        const size = Math.random() * 20 + 15;
+        const duration = Math.random() * 4 + 5;
+        const color = type === 'heart' ? '#ff4d6d' :
+            type === 'star' ? '#ffcc66' :
+                type === 'smile' ? '#ffdd33' :
+                    type === 'sun' ? '#ff9900' : '#66ccff';
+
+        element.style.color = color;
+        element.style.fontSize = `${size}px`;
+        element.style.left = `${x}px`;
+        element.style.top = `${y}px`;
+        element.style.animationDuration = `${duration}s`;
+        element.style.animationDelay = `${Math.random() * 2}s`;
+
+        document.body.appendChild(element);
+
+        // 动画结束后移除元素
+        setTimeout(() => {
+            element.remove();
+        }, duration * 1000);
+    }
+
+    // 创建心形脉冲效果
+    function createHeartPulse(x, y) {
+        const pulse = document.createElement('div');
+        pulse.className = 'heart-pulse';
+        pulse.style.left = `${x}px`;
+        pulse.style.top = `${y}px`;
+
+        document.body.appendChild(pulse);
+
+        setTimeout(() => {
+            pulse.remove();
+        }, 2000);
+    }
+
+    // 获取DOM元素
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const greetingMessage = document.getElementById('greetingMessage');
+    const familySilhouette = document.getElementById('familySilhouette');
+    const interactiveArea = document.getElementById('interactiveArea');
+
+    // 存储所有消息元素
+    const messages = [];
+
+    // 设置Canvas尺寸
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // 烟花粒子类
+    class Particle {
+        constructor(x, y, color, velocity, isSpark = false) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.velocity = {
+                x: (Math.random() - 0.5) * (isSpark ? 5 : 10),
+                y: (Math.random() - 0.5) * (isSpark ? 5 : 10)
+            };
+            this.radius = isSpark ? Math.random() * 2 : Math.random() * 3 + 1;
+            this.alpha = 1;
+            this.gravity = 0.05;
+            this.friction = isSpark ? 0.99 : 0.98;
+            this.life = isSpark ? 60 : 100;
+            this.initialLife = this.life;
+            this.isSpark = isSpark;
+        }
+
+        update() {
+            this.velocity.y += this.gravity;
+            this.velocity.x *= this.friction;
+            this.velocity.y *= this.friction;
+            this.x += this.velocity.x;
+            this.y += this.velocity.y;
+            this.life--;
+            this.alpha = this.life / this.initialLife;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    // 烟花类
+    class Firework {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height;
+            this.targetY = Math.random() * canvas.height * 0.5 + canvas.height * 0.2;
+            this.color = `hsl(${Math.random() * 60 + 20}, 100%, 65%)`; // 暖色调
+            this.velocity = {
+                x: (Math.random() - 0.5) * 3,
+                y: Math.random() * -8 - 10
+            };
+            this.radius = Math.random() * 3 + 2;
+            this.gravity = 0.1;
+            this.exploded = false;
+            this.particles = [];
+            this.messageElement = null;
+            this.messages = [
+                "爸爸，您辛苦了！",
+                "父亲节快乐！",
+                "我爱您，爸爸！",
+                "谢谢您为我做的一切！",
+                "祝您健康长寿！",
+                "您永远是我的英雄！",
+                "您的爱是我前进的动力！",
+                "感谢您教会我如何成为一个好人！",
+                "您是最好的父亲！",
+                "愿您每天都开心快乐！",
+                "爸爸，您是我的超人！",
+                "有您在，我永远有安全感",
+                "您是我最坚强的后盾",
+                "爸爸，谢谢您的包容",
+                "您教会了我勇敢和坚强",
+                "我会永远做您的骄傲",
+                "您是我生命中最重要的人",
+                "感谢您为我遮风挡雨",
+                "您的笑容是我最大的幸福",
+                "您是我永远的榜样",
+                "爸爸，您辛苦了",
+                "您是我最温暖的港湾",
+                "感谢您无私的付出",
+                "您是我最坚实的依靠",
+                "愿您永远年轻快乐",
+                "您是我最敬爱的人",
+                "感谢您一直以来的陪伴",
+                "您是我最珍贵的礼物",
+                "愿您永远健康平安",
+                "您是我最温暖的阳光"
+            ];
+            this.currentMessage = this.messages[Math.floor(Math.random() * this.messages.length)];
+        }
+
+        update() {
+            if (!this.exploded) {
+                this.velocity.y += this.gravity;
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+
+                if (this.velocity.y >= 0 || this.y <= this.targetY) {
+                    this.explode();
+                }
+            } else {
+                for (let i = this.particles.length - 1; i >= 0; i--) {
+                    const particle = this.particles[i];
+                    particle.update();
+
+                    if (particle.life <= 0) {
+                        this.particles.splice(i, 1);
+                    }
+                }
+
+                if (this.particles.length === 0 && this.messageElement) {
+                    this.messageElement.remove();
+                    this.reset();
+                }
+            }
+        }
+
+        explode() {
+            this.exploded = true;
+
+            // 创建烟花粒子
+            for (let i = 0; i < 150; i++) {
+                this.particles.push(new Particle(this.x, this.y, this.color, this.velocity));
+            }
+
+            // 创建烟花火花
+            for (let i = 0; i < 100; i++) {
+                this.particles.push(new Particle(this.x, this.y, this.color, this.velocity, true));
+            }
+
+            // 随机创建一些漂浮元素
+            const elementTypes = ['heart', 'star', 'smile', 'father', 'child'];
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const type = elementTypes[Math.floor(Math.random() * elementTypes.length)];
+                    createFloatingElement(
+                        this.x + (Math.random() - 0.5) * 100,
+                        this.y + (Math.random() - 0.5) * 100,
+                        type
+                    );
+                }, i * 100);
+            }
+
+            // 显示文字
+            this.displayMessage();
+        }
+
+        displayMessage() {
+            if (this.messageElement) return;
+
+            // 创建新的消息元素
+            this.messageElement = document.createElement('div');
+            this.messageElement.className = 'message';
+            this.messageElement.textContent = this.currentMessage;
+            document.body.appendChild(this.messageElement);
+
+            // 定位到烟花爆炸位置
+            this.messageElement.style.left = `${this.x}px`;
+            this.messageElement.style.top = `${this.y}px`;
+
+            // 添加到消息数组
+            messages.push(this.messageElement);
+
+            // 触发动画
+            setTimeout(() => {
+                this.messageElement.classList.add('active');
+
+                // 3秒后淡出
+                setTimeout(() => {
+                    this.messageElement.classList.remove('active');
+                    this.messageElement.classList.add('fade');
+
+                    // 动画结束后移除元素
+                    setTimeout(() => {
+                        if (this.messageElement && document.body.contains(this.messageElement)) {
+                            document.body.removeChild(this.messageElement);
+
+                            // 从消息数组中移除
+                            const index = messages.indexOf(this.messageElement);
+                            if (index !== -1) {
+                                messages.splice(index, 1);
+                            }
+                        }
+                    }, 500);
+                }, 3000);
+            }, 10);
+        }
+
+        draw() {
+            if (!this.exploded) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                // 绘制烟花尾迹
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.velocity.x * 2, this.y - this.velocity.y * 2);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            } else {
+                for (const particle of this.particles) {
+                    particle.draw();
+                }
+            }
+        }
+    }
+
+    // 创建烟花数组
+    const fireworks = [];
+
+    // 新增点击冷却时间和最大烟花数量限制
+    const MAX_FIREWORKS = 8; // 最大同时存在烟花数量
+    const CLICK_COOLDOWN = 800; // 点击冷却时间（毫秒）
+    let lastClickTime = 0;
+
+    // 动画循环
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.fillStyle = 'rgba(10, 25, 47, 0.2)'; // 添加淡出效果
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (const firework of fireworks) {
+            firework.update();
+            firework.draw();
+        }
+    }
+
+    animate();
+
+    // 音乐控制
+    musicToggle.addEventListener('click', () => {
+        if (backgroundMusic.paused) {
+            backgroundMusic.play().catch(e => {
+                console.error("播放失败:", e);
+                alert("背景音乐播放失败，您可以手动点击播放按钮尝试。");
+            });
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        } else {
+            backgroundMusic.pause();
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+        }
+    });
+
+    // 自动播放音乐
+    function tryPlayMusic() {
+        const playPromise = backgroundMusic.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("自动播放被浏览器阻止:", error);
+                // 显示播放按钮提示
+                musicToggle.style.animation = "pulse 2s infinite";
+            });
+        }
+    }
+
+    // 页面加载完成后显示问候消息，然后自动开始烟花
+    window.addEventListener('load', () => {
+        // 显示问候消息
+        setTimeout(() => {
+            greetingMessage.classList.add('active');
+            familySilhouette.classList.add('active');
+        }, 500);
+
+        // 3秒后开始烟花
+        setTimeout(() => {
+            // 创建初始烟花
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    fireworks.push(new Firework());
+                }, i * 1000);
+            }
+
+            // 随机添加新烟花
+            setInterval(() => {
+                if (Math.random() < 0.03 && fireworks.length < 8) {
+                    fireworks.push(new Firework());
+                }
+            }, 1000);
+
+            // 尝试播放音乐
+            tryPlayMusic();
+        }, 3000);
+    });
+
+    // 优化后的点击事件处理
+    interactiveArea.addEventListener('click', (e) => {
+        const currentTime = Date.now();
+        // 检查冷却时间
+        if (currentTime - lastClickTime < CLICK_COOLDOWN) return;
+        lastClickTime = currentTime;
+
+        // 检查最大烟花数量
+        if (fireworks.length >= MAX_FIREWORKS) return;
+
+        const firework = new Firework();
+        firework.x = e.clientX;
+        firework.y = canvas.height;
+        firework.targetY = Math.random() * canvas.height * 0.3 + canvas.height * 0.2;
+        fireworks.push(firework);
+
+        createHeartPulse(e.clientX, e.clientY);
+    });
+
+    // 鼠标移动时创建漂浮元素
+    interactiveArea.addEventListener('mousemove', (e) => {
+        if (Math.random() < 0.1) {
+            const types = ['heart', 'star', 'smile'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            createFloatingElement(e.clientX, e.clientY, type);
+        }
+    });
+
+    // 创建漂浮祝福语
+    function createFloatingPhotos() {
+        const container = document.getElementById('floatingPhotos');
+        const blessings = [
+            {text: "愿您健康长寿，幸福安康", rotation: -15, x: 10, y: 20},
+            {text: "感谢您一直以来的付出与关爱", rotation: 10, x: 80, y: 30},
+            {text: "您是我生命中最温暖的阳光", rotation: -5, x: 30, y: 70},
+            {text: "愿您永远年轻快乐", rotation: 8, x: 60, y: 40},
+            {text: "您是我最坚实的依靠", rotation: -8, x: 40, y: 60}
+        ];
+
+        blessings.forEach(blessing => {
+            const frame = document.createElement('div');
+            frame.className = 'blessing-frame';
+            frame.style.setProperty('--rotation', `${blessing.rotation}deg`);
+            frame.style.left = `${blessing.x}%`;
+            frame.style.top = `${blessing.y}%`;
+            frame.textContent = blessing.text;
+            container.appendChild(frame);
+        });
+    }
+
+    // 创建漂浮文字
+    function createFloatingTexts() {
+        const container = document.getElementById('floatingTexts');
+        const texts = [
+            "爸爸，您辛苦了",
+            "父亲节快乐",
+            "感谢您的付出",
+            "您是我永远的榜样",
+            "我爱您，爸爸"
+        ];
+
+        texts.forEach((text, index) => {
+            const element = document.createElement('div');
+            element.className = 'floating-text';
+            element.textContent = text;
+            element.style.setProperty('--y', `${20 + index * 15}%`);
+            element.style.animationDelay = `${index * 3}s`;
+            container.appendChild(element);
+        });
+    }
+
+    // 音乐列表控制
+    const musicList = document.getElementById('musicList');
+    const musicItems = document.querySelectorAll('.music-item');
+
+    document.getElementById('musicToggle').addEventListener('click', () => {
+        musicList.classList.toggle('active');
+    });
+
+    musicItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const src = item.getAttribute('data-src');
+            backgroundMusic.src = src;
+            backgroundMusic.play();
+            musicList.classList.remove('active');
+        });
+    });
+
+    // 帷幕效果
+    function initCurtain() {
+        const curtainLeft = document.querySelector('.curtain-left');
+        const curtainRight = document.querySelector('.curtain-right');
+        const curtainContent = document.querySelector('.curtain-content');
+
+        // 显示加载内容
+        setTimeout(() => {
+            curtainContent.classList.add('active');
+        }, 500);
+
+        // 3秒后拉开帷幕
+        setTimeout(() => {
+            curtainLeft.classList.add('open-left');
+            curtainRight.classList.add('open-right');
+            curtainContent.style.opacity = '0';
+        }, 3000);
+
+        // 4秒后移除帷幕元素
+        setTimeout(() => {
+            curtainLeft.remove();
+            curtainRight.remove();
+            curtainContent.remove();
+        }, 4500);
+    }
+
+    // 创建背景粒子
+    function createBackgroundParticles() {
+        const container = document.getElementById('backgroundParticles');
+        const particleCount = 15;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+
+            // 随机大小和位置
+            const size = Math.random() * 200 + 100;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const delay = Math.random() * 20;
+            const duration = Math.random() * 10 + 15;
+
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${x}%`;
+            particle.style.top = `${y}%`;
+            particle.style.animationDelay = `${delay}s`;
+            particle.style.animationDuration = `${duration}s`;
+
+            container.appendChild(particle);
+        }
+    }
+
+    // 初始化
+    window.addEventListener('load', () => {
+        initCurtain();
+        createBackgroundParticles();
+        createFloatingPhotos();
+        createFloatingTexts();
+        // ... existing load event code ...
+    });
+
+    // 礼物信封交互
+    const giftEnvelope = document.getElementById('giftEnvelope');
+    giftEnvelope.addEventListener('click', () => {
+        giftEnvelope.classList.toggle('open');
+        // 点击后返回到原来的位置
+        if (window.innerWidth <= 480) {
+            giftEnvelope.style.left = '50%';
+            giftEnvelope.style.transform = 'translateX(-50%)';
+        }
+    });
+</script>
+</body>
+</html>
