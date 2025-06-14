@@ -1909,11 +1909,12 @@
             curtainContent.style.opacity = '0';
         }, 3000);
 
-        // 4秒后移除帷幕元素
+        // 4秒后移除帷幕元素，并再次尝试播放音乐
         setTimeout(() => {
             curtainLeft.remove();
             curtainRight.remove();
             curtainContent.remove();
+            tryPlayMusic(); // 帷幕拉开后再尝试
         }, 4500);
     }
 
@@ -1963,6 +1964,15 @@
             giftEnvelope.style.transform = 'translateX(-50%)';
         }
     });
+
+    // 用户首次点击页面时尝试播放音乐
+    let musicTried = false;
+    document.body.addEventListener('click', function onceTryMusic() {
+        if (!musicTried) {
+            tryPlayMusic();
+            musicTried = true;
+        }
+    }, { once: true });
 </script>
 </body>
 </html>
